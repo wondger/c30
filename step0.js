@@ -45,7 +45,7 @@ KISSY.ready(function(S){
         while (n--) {
             var arc = Math.random() * 2 * Math.PI,
                 r = Math.random() * r0;
-            point(x + Math.cos(arc) * r, y + Math.sin(arc) * r, "rgba(200, 200, 200," + (.2 + .5 * Math.random()) + ")")
+            point(x + Math.cos(arc) * r, y + Math.sin(arc) * r, "rgba(200, 200, 200," + (.5 + .5 * Math.random()) + ")")
         }
     }
 
@@ -59,19 +59,15 @@ KISSY.ready(function(S){
     }
 
     function password() {
-        var n = 6,
-            ret = [];
-
-        while (n--) {
-            ret.push(Math.floor(Math.random() * 10));
-        }
-
-        return ret;
+        return [0,1,2,3,4,5,6,7,8,9].sort(function(){
+            return Math.random() > .5;
+        }).slice(4);
     }
 
     function getKey(x, y) {
         var i = 0,
             pt;
+
         while (pt = coords[i]) {
             if (x > pt.x - 15 && x < pt.x + 50 && y > pt.y - 10 && y < pt.y + 50) {
                 return i;
@@ -120,7 +116,9 @@ KISSY.ready(function(S){
     S.one(window).fire("resize");
 
     c.on("click", function(e){
-        var k = getKey(e.clientX, e.clientY);
+        var ofst = c.offset(),
+            k = getKey(e.clientX - ofst.left + window.scrollX, e.clientY - ofst.top + window.scrollY);
+
         if (k === 10) {
             _pwd_ = "";
         }
