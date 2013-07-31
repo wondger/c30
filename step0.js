@@ -9,36 +9,46 @@
  */
 KISSY.ready(function(S){
     var c = S.one("#J_Canvas"),
-        ctx = c && c[0].getContext('2d');
+        ctx = c && c[0].getContext('2d'),
+        ofst = c.offset();
 
     var coords = [
-        {x: 735, y: 330}
-        ,{x: 680, y: 120}
-        ,{x: 750, y: 120}
-        ,{x: 815, y: 123}
-        ,{x: 675, y: 190}
-        ,{x: 745, y: 195}
-        ,{x: 810, y: 190}
-        ,{x: 675, y: 260}
-        ,{x: 745, y: 260}
-        ,{x: 815, y: 260}
-        ,{x: 665, y: 330}
-        ,{x: 815, y: 330}
+        {x: 789, y: 341}
+        ,{x: 729, y: 110}
+        ,{x: 802, y: 110}
+        ,{x: 875, y: 110}
+        ,{x: 725, y: 187}
+        ,{x: 798, y: 187}
+        ,{x: 872, y: 187}
+        ,{x: 720, y: 264}
+        ,{x: 793, y: 264}
+        ,{x: 867, y: 264}
+        ,{x: 716, y: 341}
+        ,{x: 863, y: 341}
     ];
 
     var _MSG_ = 0,
         _BLOWC_ = 0;
 
-    function bg() {
-        i = new Image();
+    function draw(img, x, y, a) {
+        var i = new Image();
         i.onload = function() {
-            ctx.drawImage(i,0,0);
+            if (a) {
+                ctx.save();
+                ctx.globalAlpha = a;
+            }
+            ctx.drawImage(i, x, y);
         }
-
-        i.src = "images/i.png";
+        i.src = img;
     }
 
-    bg();
+    draw("images/i.png", 0, 0);
+
+    function kd(i) {
+        if (!S.isNumber(i) || i < 0 || i > 11) return;
+
+        draw("images/btn.png", coords[i].x, coords[i].y);
+    }
 
     function fingerprint(x, y, r, n) {
         var r0 = r;
@@ -47,6 +57,10 @@ KISSY.ready(function(S){
                 r = Math.random() * r0;
             point(x + Math.cos(arc) * r, y + Math.sin(arc) * r, "rgba(200, 200, 200," + (.5 + .5 * Math.random()) + ")")
         }
+    }
+
+    function fp(x, y, a) {
+        draw("images/fp.png", x, y, a);
     }
 
     function point(x, y, rgba) {
@@ -69,7 +83,7 @@ KISSY.ready(function(S){
             pt;
 
         while (pt = coords[i]) {
-            if (x > pt.x - 15 && x < pt.x + 50 && y > pt.y - 10 && y < pt.y + 50) {
+            if (x > pt.x && x < pt.x + 65 && y > pt.y && y < pt.y + 60) {
                 return i;
             }
 
@@ -85,8 +99,11 @@ KISSY.ready(function(S){
             if (_BLOWC_ >= 10) return;
             _BLOWC_ ++;
             S.each(pwd, function(n) {
-                fingerprint(coords[n].x, coords[n].y, 20, Math.floor(Math.random() * 100));
+                //fingerprint(coords[n].x + 31, coords[n].y + 28, 20, Math.floor(Math.random() * 100));
+                fp(coords[n].x + 3 + n%5, coords[n].y + 7 + n%3, Math.random() * .04);
             });
+
+            fp(coords[11].x + 5, coords[11].y + 5, Math.random() * .04);
         }
     };
 
@@ -102,7 +119,7 @@ KISSY.ready(function(S){
 
     function bn() {
         var b = "======================================\n"
-                + "          Welcomt to CXA!\n"
+                + "          Welcome to CXA!\n"
                 + "Run powder.blow() to show fingerprint.\n"
                 + "======================================";
 
@@ -115,9 +132,10 @@ KISSY.ready(function(S){
 
     S.one(window).fire("resize");
 
-    c.on("click", function(e){
-        var ofst = c.offset(),
-            k = getKey(e.clientX - ofst.left + window.scrollX, e.clientY - ofst.top + window.scrollY);
+    c.on("mousedown", function(e){
+        var k = getKey(e.clientX - ofst.left + window.scrollX, e.clientY - ofst.top + window.scrollY);
+
+        //kd(k);
 
         if (k === 10) {
             _pwd_ = "";
@@ -134,6 +152,15 @@ KISSY.ready(function(S){
         else if (S.isNumber(k)){
             _pwd_ += k;
         }
-    });
+    })
+    .on("mousemove", function(e){
+        var k = getKey(e.clientX - ofst.left + window.scrollX, e.clientY - ofst.top + window.scrollY);
 
+        if (S.isNumber(k) && k >= 0 && k <= 11) {
+            c.css({"cursor": "pointer"});
+        }
+        else {
+            c.css({"cursor": "auto"});
+        }
+    });
 });
