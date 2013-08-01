@@ -42,7 +42,7 @@ KISSY.ready(function(S){
         i.src = img;
     }
 
-    draw("http://img04.taobaocdn.com/tps/i4/T16kt3FehdXXaBRMbX-1024-624.png", 0, 0);
+    draw("http://img03.taobaocdn.com/tps/i3/T1pkJ5FXRcXXaBRMbX-1024-624.png", 0, 0);
 
     function kd(i) {
         if (!S.isNumber(i) || i < 0 || i > 11) return;
@@ -145,7 +145,7 @@ KISSY.ready(function(S){
                 alert("Pass!");
             }
             else {
-                alert("Password Incorrect!");
+                alert("Opps，不是这个密码！");
                 _pwd_ = "";
             }
         }
