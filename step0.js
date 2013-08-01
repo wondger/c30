@@ -42,12 +42,12 @@ KISSY.ready(function(S){
         i.src = img;
     }
 
-    draw("images/i.png", 0, 0);
+    draw("http://img04.taobaocdn.com/tps/i4/T16kt3FehdXXaBRMbX-1024-624.png", 0, 0);
 
     function kd(i) {
         if (!S.isNumber(i) || i < 0 || i > 11) return;
 
-        draw("images/btn.png", coords[i].x, coords[i].y);
+        draw("http://img02.taobaocdn.com/tps/i2/T18WNOFoxgXXaST7zk-63-63.png", coords[i].x, coords[i].y);
     }
 
     function fingerprint(x, y, r, n) {
@@ -60,7 +60,7 @@ KISSY.ready(function(S){
     }
 
     function fp(x, y, a) {
-        draw("images/fp.png", x, y, a);
+        draw("http://img03.taobaocdn.com/tps/i3/T1hdd6FbhaXXclgZYg-44-45.png", x, y, a);
     }
 
     function point(x, y, rgba) {
