@@ -1,7 +1,7 @@
 /*
  * @name: step0.js
  * @description: 
- * @author: 棪木(wondger@gmail.com)
+ * @author: 妫湪(wondger@gmail.com)
  * @date: 2013-07-23
  * @param: 
  * @todo: 
@@ -145,7 +145,7 @@ KISSY.ready(function(S){
                 alert("Pass!");
             }
             else {
-                alert("Opps，不是这个密码！");
+                alert("Opps锛屼笉鏄繖涓瘑鐮侊紒");
                 _pwd_ = "";
             }
         }
