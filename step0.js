@@ -75,7 +75,7 @@ KISSY.ready(function(S){
     function password() {
         return [0,1,2,3,4,5,6,7,8,9].sort(function(){
             return Math.random() > .5;
-        }).slice(4);
+        }).slice(7);
     }
 
     function getKey(x, y) {
