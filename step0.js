@@ -120,7 +120,7 @@ KISSY.ready(function(S){
     function bn() {
         var b = "==================================\n"
                 + "        Welcome to CXA!\n"
-                + "    This is Miss X speaking:\n\n"
+                + "      This is X speaking:\n\n"
                 + "E.J.斯诺克 (80后－) ，前奥兹国技术临时工。\n"
                 + "2013年6月将奥兹国关于魔镜监听项目的秘密文\n"
                 + "档披露给了《桃乐丝邮报》和《拿姆国早报》，\n"
